@@ -1,9 +1,9 @@
-/*************************************************************************
-> File Name: rhs.m
-> Author: Tongkai Li
-> Mail: ltk@pku.edu.cn 
-> Created Time: 2018年07月16日 星期一 15时22分42秒
-************************************************************************/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File Name: rhs.m
+% Author: Tongkai Li
+% mail: ltk@pku.edu.cn
+% Created Time: 2018年07月16日 星期一 16时34分44秒
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function [f] = rhs(t, x, theta)
 %  rhs:
 %  rhs(t, x, theta) is the right hand side of the ODE dx/dt=f(t, x, theta),
