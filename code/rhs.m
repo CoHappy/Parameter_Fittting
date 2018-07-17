@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%""%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % File Name: rhs.m
 % Author: Tongkai Li
 % mail: ltk@pku.edu.cn
@@ -7,7 +7,7 @@
 function [f] = rhs(t, x, theta)
 %  rhs:
 %  rhs(t, x, theta) is the right hand side of the ODE dx/dt=f(t, x, theta),
-%  including both function values respected to parameter theta and x.
+%  including  function values respected to theta, x and time t.
 %  where x represent the variables and theta are the set of unknown parameters.
 %  The ODE system below is the third version.
 
