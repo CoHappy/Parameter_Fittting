@@ -6,7 +6,6 @@ The algorithm is standard and decribed as follows.
 	3: Sample over the parameter space and choose some 'good' inital values with smaller error.
 	4: Based on the gradient calculated by finite difference, we apply GradientDecent(or quasi newtown method if neccessary) to find a local minimal.
 	5: Compare over these local minimums to find a 'best fit' results as the global optimal.
-
 PS:There are some 'better' method of course. But they are only 'slightly better' so we choose the simplest one.
 Actually, there are no garantee to find a true GlobalOptimal. So what we are doing is to find an 'acceptable' results.
 
@@ -16,7 +15,9 @@ If not, we will try to relax the system. The goal is to find a simple and approp
 This project is still updating till now.
 Hope we will find a good result.
 
-
+Short notes in 2018/7/20:
+	I have added most of the code.
+	I should find bugs of all these code and then run it in the server.
 
 
 
