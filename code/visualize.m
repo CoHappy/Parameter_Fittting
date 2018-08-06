@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-function[info]=visualize(t,y,texp,yexp,index,info)
+function[showfigure]=visualize(t,y,texp,yexp,index,showfigure)
 %viualize: draw pictures of the curve of different species.
 %	Input:
 %		t:		time mesh of the ODE results.
@@ -19,8 +19,12 @@ function[info]=visualize(t,y,texp,yexp,index,info)
 %			1:	only show ODE results.
 line_type = {'r-', 'g-', 'b-', 'k-', 'y-', 'm-', 'c-'};
 conc_str = {'500 ng/ml', '100 ng/ml', '50 ng/ml', '25 ng/ml', '10 ng/ml', '5 ng/ml', '1 ng/ml'};
-if (info==0)
+if (showfigure==0)
+    return ;
+end
+if (showfigure==1)
 	for i=index
+        close(figure(i));
 		figure(i);
 		plot(t{i},y{i},'r');
 		hold on
@@ -29,14 +33,17 @@ if (info==0)
 		xlabel('Time(sec))');
 		ylabel('fyn_activity');
 		legend('simulation','experiment');
+        pause(2);
 	end
 else 
 	for i=index
+        close(figure(i));
 		figure(i);
 		plot(t{i},y{i},'r')
 		title(conc_str(i));
 		xlabel('Time(sec))');
 		ylabel('fyn_activity');
 		legend('simulation');
+        pause(2);
 	end
 end

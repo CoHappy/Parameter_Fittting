@@ -23,10 +23,10 @@ function[Error,x_optimal,info]= Coor_Descent(x0,f)
 %		max_armi:	maximal iteration in armijo line search.
 		pho=0.7;
 		max_iter=500;
-		max_armi=40;
+		max_armi=20;
 
-		n=length(x0);
-		delta=1e-7;
+		n=length(x);
+		delta=1e-6;
 		xp=x0;
 		x=x0;
 		Error=0;
@@ -35,7 +35,7 @@ function[Error,x_optimal,info]= Coor_Descent(x0,f)
 		for i=1:max_iter
 			gradient=zeros(n,1);
 			for j=1:n
-				gradient(j)=(f(x+delta*[zeros(1,j-1),1,zeros(1,n-j)])-f(x))/delta;
+				gradient(j)=(f(x+delta*[zeros(j-1,1);1;zeros(n-j,1)])-f(x))/delta;
 			end
 			if (norm(gradient)==0)
 				info=0;
@@ -58,10 +58,7 @@ function[Error,x_optimal,info]= Coor_Descent(x0,f)
 					break;
 					end
                 end
-                f(x)
-                if(success==1)
 				xp=x;
-                end
             end
             if(success==0)
 					info=1;

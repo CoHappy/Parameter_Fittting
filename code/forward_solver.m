@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-function[t,result] = forward_solver(@rhs,tspan,y0,theta,options)
+function[t,result] = forward_solver(rhs,tspan,y0,theta,options)
 %forward_solver: choose an ODE solver to solve the prolbem
 %	input:
 %		@rhs:	right hand site function .
@@ -18,7 +18,7 @@ function[t,result] = forward_solver(@rhs,tspan,y0,theta,options)
 %		t:		time mesh 
 %		result:	variable value with respect to time.
 
-[t,result]=ode15s(@rhs,tspan,y0,options,theta);
+[t,result]=ode15s(rhs,tspan,y0,options,theta);
 
 
 

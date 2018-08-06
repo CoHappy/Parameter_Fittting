@@ -49,10 +49,9 @@ for step=1:Max_step
 % Estimate the error under this certain parameter.
             y=result(:,5)+result(:,6);
 			Error(sample_number)=Error(sample_number)+Error_ODE2EXP(t{k},y,texp{k},yexp{k},tspan);
-            Theta(sample_number,:)=theta;
 % Sometimes we need to pick up parameters that lead to special patterns(double peak pattern for this case).Then we choose another error estimator.
 			[num_crit,location]= Locate_crit(t{k},y,tspan);
-			if(num_crit>=3)
+			if(num_crit>=2)
 				Theta_dp(dp_number+1,:)=theta;
 				Error_dp(dp_number+1)=Error(sample_number);
 				dp_number=dp_number+1;
@@ -80,9 +79,6 @@ for step=1:Max_step
 				return ;
             end
 end
-	clear Theta Error
-	Theta=Theta_dp;
-	Error=Error_dp;
 info=0;
 
 

@@ -24,7 +24,6 @@ function[num_crit,locate]= Locate_crit(t,y,tspan)
 
 	tstart=tspan(1);
 	tend=tspan(2);
-
 %Find the time mesh that is in the interval.
 	Index=find(t<=tend & t>=tstart);
 
@@ -34,15 +33,14 @@ function[num_crit,locate]= Locate_crit(t,y,tspan)
 	
 	n=length(t);
 	num_crit=0;
-    locate=[];
 %Collected time that the data remains monotonous.
 	time_collect=0;	
 %Collected distance that the data remains monotonous.
 	dis_collect=0;
 %Time threshhold to decide wheather a monotonous interval is legal.
-	time_thresh=6;
+	time_thresh=10;
 %Distance threshhold to decide wheather monotonous interval is legal.
-	dis_thresh=1e-4*Max;
+	dis_thresh=1e-2*Max;
 %Start and end of a monotonous interval.	
 	mono_end=1;
 	mono_start=1;
@@ -53,7 +51,7 @@ function[num_crit,locate]= Locate_crit(t,y,tspan)
 
 	for i=1:n-1
 		change=y(i+1)-y(i);
-		if(change*msign>=0&&i<n-1)
+		if(change*msign>=0)
 			time_collect=time_collect+t(i+1)-t(i);
 			dis_collect=dis_collect+change;
 			mono_end=i+1;

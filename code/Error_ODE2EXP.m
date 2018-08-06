@@ -28,10 +28,10 @@ function[ret]=Error_ODE2EXP(t,result,texp,yexp,tspan)
 	yode=interp1(t,result,texp,'spline');
 
 	for i=1:length(texp)-1
-		ret=ret+(texp(i+1)-texp(i))*(yode(k)-yexp(k))^2;
+		ret=ret+(texp(i+1)-texp(i))*(yode(i)-yexp(i))^2;
 	end
 
-	return ret;
+	return ;
 
 
 
