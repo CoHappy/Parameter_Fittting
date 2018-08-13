@@ -23,7 +23,7 @@ var_index=[1:15,17,18];
 theta=zeros(1,18);
 group_index=[4];
 gf_con = [80.65, 16.13, 8.065, 4.033, 1.515, 0.76, 0.1515];
-options=odeset('RelTol',1e-10,'MaxStep',1.0,'Stats','off');
+options=odeset('RelTol',1e-5,'MaxStep',1.0,'Stats','off');
 line_type = {'r-', 'g-', 'b-', 'k-', 'y-', 'm-', 'c-'};
 conc_str = {'500 ng/ml', '100 ng/ml', '50 ng/ml', '25 ng/ml', '10 ng/ml', '5 ng/ml', '1 ng/ml'};
 

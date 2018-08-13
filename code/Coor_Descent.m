@@ -5,7 +5,7 @@
 % Created Time: 2018年07月19日 星期五 10时54分33秒
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[Error,x_optimal,info]= Coor_Descent(x0,f)
+function[Error,x_optimal,info]= Coor_Descent(x0,f,var_index)
 % Coor_Descent: Apply coordinate descent method to find the optimal value of the @cost_function from x0.
 %	Input:
 %		x0:			initial value of the parameter.
@@ -34,18 +34,19 @@ function[Error,x_optimal,info]= Coor_Descent(x0,f)
 
 		for i=1:max_iter
 			gradient=zeros(n,1);
-			for j=1:n
-				gradient(j)=(f(x+delta*[zeros(1,j-1),1,zeros(1,n-j)])-f(x))/delta;
-			end
-			if (norm(gradient)==0)
-				info=0;
-				return ;
-
-			end
+% 			for j=var_index
+% 				gradient(j)=(f(x+delta*[zeros(1,j-1),1,zeros(1,n-j)])-f(x))/delta;
+% 			end
+% 			if (norm(gradient)==0)
+% 				info=0;
+% 				return ;
+% 
+% 			end
 			success=0;
-			queue=randperm(n);
+			queue=randperm(length(var_index));
 %Here we search over all directions, can be modified latter.
-            for j=queue
+            j=var_index(queue(1));
+            gradient(j)=(f(x+delta*[zeros(1,j-1),1,zeros(1,n-j)])-f(x))/delta;
                 for l=0:max_armi
 					x(j)=xp(j)-gradient(j)*pho^l;
 %Bioparameters are all nonnegetive so we should hold these constraint when we are doing line search.
@@ -62,7 +63,7 @@ function[Error,x_optimal,info]= Coor_Descent(x0,f)
                 if(success==1)
 				xp=x;
                 end
-            end
+
             if(success==0)
 					info=1;
 					x_optimal=xp;

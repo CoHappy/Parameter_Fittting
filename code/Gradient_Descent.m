@@ -5,7 +5,7 @@
 % Created Time: 2018年07月19日 星期四 16时45分33秒
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[Error,x_optimal,info]= Gradient_Descent(x0,f)
+function[Error,x_optimal,info]= Gradient_Descent(x0,f,var_index)
 % Gradient_Descent: Apply GD method to find the optimal value of the @cost_function from x0.
 %	Input:
 %		x0:			initial value of the parameter.
@@ -26,7 +26,7 @@ function[Error,x_optimal,info]= Gradient_Descent(x0,f)
 		max_armi=40;
         tol=1e-3;
 
-		n=length(x0);
+		n=length(var_index);
 		delta=1e-7;
 		xp=x0;
 		x=x0;
@@ -36,7 +36,7 @@ function[Error,x_optimal,info]= Gradient_Descent(x0,f)
 
 		for i=1:max_iter
 			gradient=zeros(1,n);
-			for j=1:n
+			for j=var_index
 				gradient(j)=(f(x+delta*[zeros(1,j-1),1,zeros(1,n-j)])-f(x))/delta;
 			end
 			if (norm(gradient)<tol)

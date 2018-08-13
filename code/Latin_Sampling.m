@@ -25,9 +25,9 @@ function[info,Error,Theta]= Latin_Sampling(M,scale,gf_con,texp,yexp,rhs,tspan,y0
 %		Group_Index:Group index of the experiment that involved in this sampling.
 %		Max_time:	Maximal runing time.(early abort)
 	Max_sample=6000;
-	Max_step=10000;
+	Max_step=10000000;
 	Group_Index=4;
-	Max_time=3600*16;
+	Max_time=3600*25;
 	tstart=tic;
 	sample_number=1;
 	dp_number=0;
@@ -37,21 +37,21 @@ function[info,Error,Theta]= Latin_Sampling(M,scale,gf_con,texp,yexp,rhs,tspan,y0
 for step=1:Max_step
 % Generate a latin hypercube.	
 	for i=1:number_theta
-		latin_number(:,i)=randperm(M)';
+		latin_number(i,:)=randperm(M);
 	end
 	for i=1:M
 % For biochemical parameters, we may generate them in log space.
-		theta=exp(-M/2+latin_number(i,:)+rand(1,number_theta)).*scale;
+		theta=exp(-M/2+latin_number(:,i)'+rand(1,number_theta)).*scale;
         Error(sample_number)=0;
 		for k=Group_Index
 			theta(16)=gf_con(k);
 			[t{k},result]=forward_solver(rhs,tspan,y0,theta,options);
 % Estimate the error under this certain parameter.
-            y=result(:,5)+result(:,6);
-			Error(sample_number)=Error(sample_number)+Error_ODE2EXP(t{k},y,texp{k},yexp{k},tspan);
+            y{k}=result(:,5)+result(:,6);
+			Error(sample_number)=Error(sample_number)+Error_ODE2EXP(t{k},y{k},texp{k},yexp{k},tspan);
             Theta(sample_number,:)=theta;
 % Sometimes we need to pick up parameters that lead to special patterns(double peak pattern for this case).Then we choose another error estimator.
-			[num_crit,location]= Locate_crit(t{k},y,tspan);
+			[num_crit,location]= Locate_crit(t{k},y{k},tspan);
 			if(num_crit>=3)
 				Theta_dp(dp_number+1,:)=theta;
 				Error_dp(dp_number+1)=Error(sample_number);
